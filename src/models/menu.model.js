@@ -1,19 +1,20 @@
-// dishes-model.js - A mongoose model
+// menu-model.js - A mongoose model
 // 
 // See http://mongoosejs.com/docs/models.html
+
+const { isValidObjectId } = require("mongoose");
+
 // for more of what you can do here.
 module.exports = function (app) {
-  const modelName = 'dishes';
+  const modelName = 'menu';
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const schema = new Schema({
-    name: { type: String, required: true },
-    date: {type: String, required: true},
-    nutrition: {type: String, required: true},
-    isHot: {type: Boolean, required: true},
-    isSpicy: {type: Boolean, required: true},
-    picture: {type: String, required: true},
-    ingredients:{type: String, required: true}
+    breakfast: {type: [mongooseClient.Types.ObjectId], required: true },
+    lunch: {type: [mongooseClient.Types.ObjectId], required: true },
+    dinner: {type: [mongooseClient.Types.ObjectId], required: true },
+    snack: {type: [mongooseClient.Types.ObjectId], required: true },
+    date: {type: String, required: true, unique: true, enum: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]}
   }, {
     timestamps: true
   });
@@ -26,6 +27,4 @@ module.exports = function (app) {
   return mongooseClient.model(modelName, schema);
   
 };
-
-
 

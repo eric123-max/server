@@ -1,18 +1,16 @@
-// users-model.js - A mongoose model
-//
+// comment-model.js - A mongoose model
+// 
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 module.exports = function (app) {
-  const modelName = 'users';
+  const modelName = 'comment';
   const mongooseClient = app.get('mongooseClient');
-  const schema = new mongooseClient.Schema({
-  
-    name: { type: String, required: true },
-    date: {type: String, required: true},
-    nutrition: {type: String, required: true},
-    isHot: {type: Boolean, required: true},
-    isSpicy: {type: Boolean, required: true},
-    picture: {type: String, required: true}
+  const { Schema } = mongooseClient;
+  const schema = new Schema({
+    Id: {type: String, required: true},
+    date: {type: Date, required: true},
+    content:{type: String, required: true},
+    DishId: {type: String, required: true}
   }, {
     timestamps: true
   });
@@ -23,5 +21,5 @@ module.exports = function (app) {
     mongooseClient.deleteModel(modelName);
   }
   return mongooseClient.model(modelName, schema);
-
+  
 };
