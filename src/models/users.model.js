@@ -6,13 +6,8 @@ module.exports = function (app) {
   const modelName = 'users';
   const mongooseClient = app.get('mongooseClient');
   const schema = new mongooseClient.Schema({
-  
-    name: { type: String, required: true },
-    date: {type: String, required: true},
-    nutrition: {type: String, required: true},
-    isHot: {type: Boolean, required: true},
-    isSpicy: {type: Boolean, required: true},
-    picture: {type: String, required: true}
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true }
   }, {
     timestamps: true
   });
